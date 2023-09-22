@@ -62,7 +62,6 @@ import CreateNewCategory from "./pages/management/inventory/CreateNewCategory";
 import UpdateInventory from "./pages/management/inventory/UpdateInventory";
 import OrderStatus from "./pages/management/orderStatus/Status";
 import AddStatus from "./pages/management/orderStatus/AddStatus";
-import { HashRouter } from "react-router-dom";
 
 const App = () => {
   const { token, setToken } = useToken(null);
@@ -115,7 +114,10 @@ const App = () => {
             loader={({ params }) => fetchOrderById({ params }, token)}
           />
         </Route>
+
+        {/* Delivery Route */}
         <Route path="/delivery" element={<Delivery token={token} />} />
+
         {/* CONTACT ROUTE */}
         <Route path="contact" element={<Contact token={token} />}>
           <Route path="addCustomer" element={<CreateContact token={token} />} />
