@@ -1,0 +1,8 @@
+@use "../colors";
+@use "../general";
+@use "../mixing";
+
+.table-container {
+  height: 100%;
+  @include mixing.table;
+}

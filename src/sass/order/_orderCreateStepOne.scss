@@ -1,0 +1,50 @@
+@use '../colors';
+@use '../general';
+@use '../mixing';
+
+.orderInput--wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+
+  input,
+  select {
+    @include mixing.inputFileds;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+.stepOneBtn {
+  @include mixing.button;
+  padding: 13px 45px;
+  letter-spacing: general.$spacing;
+}
+
+.sendOrderBtn {
+  @include mixing.button;
+  letter-spacing: general.$spacing;
+}
+.totalPrice {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.totalPriceSum {
+  font-weight: 500;
+}
+
+.deliveryIcon {
+  cursor: pointer;
+}
+
+.stepOneFlex {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.currentPrice {
+  font-size: 11px;
+}

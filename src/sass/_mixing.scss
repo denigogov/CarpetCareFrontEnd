@@ -1,0 +1,93 @@
+@use './colors';
+@use './general';
+
+@mixin inputFieldsLogin($borderColor: colors.$borderLine-Primary) {
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+  background-size: 13px;
+  background-position: right 10px top 11px;
+  padding: 13px 40px;
+
+  &:focus {
+    outline: 1px solid colors.$borderLine-Second;
+  }
+}
+
+@mixin button() {
+  background-color: colors.$button-Primary;
+  padding: 15px;
+  border-radius: 20px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: general.$transition;
+
+  &:hover {
+    background-color: colors.$button-Primary-Dark;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-3px);
+  }
+}
+
+@mixin inputFileds() {
+  text-align: center;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid colors.$borderLine-Second;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:focus {
+    outline: 4px solid colors.$borderLine-Primary;
+  }
+
+  &:invalid {
+    border: 1px solid colors.$error;
+  }
+}
+
+@mixin inputFiledsAddIcon() {
+  // add image before this mixing in the component
+  text-align: center;
+  padding-left: 25px;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 25px;
+  background-color: #fff;
+}
+
+//   @mixin buttonHover($btnHoverColor: colors.$primary-darker) {
+//     background-color: $btnHoverColor;
+//   }
+
+@mixin table() {
+  table {
+    background-color: #fff;
+    width: 100%;
+    // height: 400px; /* heigh of the table */
+    border-collapse: collapse;
+    text-align: center;
+
+    th,
+    td {
+      position: relative;
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid colors.$borderLine-Primary;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 24px;
+        cursor: pointer;
+      }
+    }
+
+    tr:hover {
+      transition: general.$transition;
+      background-color: colors.$background-Primary;
+    }
+  }
+}

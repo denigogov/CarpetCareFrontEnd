@@ -1,0 +1,20 @@
+@use '../colors';
+@use '../mixing';
+@use '../general';
+
+.table-customers {
+  width: 100%;
+  height: calc(100vh - 160px);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$banner-Primary;
+  }
+
+  @include mixing.table;
+}

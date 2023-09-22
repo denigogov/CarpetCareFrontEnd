@@ -1,0 +1,8 @@
+@use '../colors';
+@use '../mixing';
+@use '../general';
+
+.table-searchOrderView {
+  @include mixing.table;
+  font-size: 13px;
+}

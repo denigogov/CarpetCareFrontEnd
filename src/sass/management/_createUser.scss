@@ -1,0 +1,40 @@
+@use "../colors";
+@use "../mixing";
+@use "../general";
+.createUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  height: 100%;
+
+  form {
+    display: flex;
+    gap: 60px;
+  }
+}
+
+.createUserColumn-left,
+.createUserColumn-rigth {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  gap: 10px;
+
+  input,
+  select {
+    text-align: center;
+    @include mixing.inputFileds();
+  }
+}
+
+.requiredField {
+  color: colors.$borderLine-Second;
+}
+.createUserBtn {
+  @include mixing.button;
+  margin-top: 1rem;
+  letter-spacing: general.$spacing;
+}

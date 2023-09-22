@@ -1,0 +1,37 @@
+@use "../colors";
+@use "../mixing";
+@use "../general";
+
+.editUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.editUser--data {
+  display: flex;
+  gap: 70px;
+}
+
+.editUser--columnLeft,
+.editUser--columnRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input,
+  select {
+    text-align: center;
+    gap: 20px;
+    @include mixing.inputFileds();
+  }
+}
+.updateUserBtn {
+  @include mixing.button;
+  letter-spacing: general.$spacing;
+  margin-top: 1.5rem;
+}

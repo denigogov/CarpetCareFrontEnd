@@ -1,0 +1,26 @@
+@use '../../colors';
+@use '../../mixing';
+@use '../../general';
+
+.inventoryTable {
+  width: 100%;
+  height: calc(100vh - 250px);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$banner-Primary;
+  }
+  @include mixing.table;
+}
+
+.buttonPopup {
+  button {
+    @include mixing.button;
+    letter-spacing: general.$spacing;
+  }
+}
