@@ -1,16 +1,16 @@
-import { useSWRConfig } from 'swr';
-import '../../sass/management/_createUser.scss';
-import { useEffect, useState } from 'react';
-import { fetchTableDepartment } from '../../api';
-import ApiSendRequestMessage from '../../components/ApiSendRequestMessage';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useSWRConfig } from "swr";
+import "../../sass/management/_createUser.scss";
+import { useEffect, useState } from "react";
+import { fetchTableDepartment } from "../../api";
+import ApiSendRequestMessage from "../../components/ApiSendRequestMessage";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
 const CreateUser = ({ token }) => {
   const { mutate } = useSWRConfig();
   const [departments, setDepartments] = useState([]);
   const [userDataStoring, setUserDataStoring] = useState({});
-  const [success, setSucces] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [success, setSucces] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const [setPopupOpen] = useOutletContext();
@@ -24,43 +24,43 @@ const CreateUser = ({ token }) => {
 
     if (success) {
       const timer = setTimeout(() => {
-        setSucces('');
+        setSucces("");
         setPopupOpen(false);
-        navigate('/management/users/');
+        navigate("/management/users/");
       }, 2000);
       return () => clearTimeout(timer);
     }
   }, [success]);
 
-  const inputUserForm = e => {
+  const inputUserForm = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    const convertedValue = name === 'department_id' ? parseInt(value) : value;
+    const convertedValue = name === "department_id" ? parseInt(value) : value;
 
-    setUserDataStoring(prevState => ({
+    setUserDataStoring((prevState) => ({
       ...prevState,
       [name]: convertedValue,
     }));
   };
 
-  const submitCreateUser = e => {
+  const submitCreateUser = (e) => {
     e.preventDefault();
 
     const createUser = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/user/`, {
-          method: 'POST',
+        const res = await fetch(`https://carpetcare.onrender.com/user/`, {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(userDataStoring),
         });
 
         if (res.ok) {
-          mutate('http://localhost:4000/user'); // mutate is  Refresh the users data
+          mutate("https://carpetcare.onrender.com/user"); // mutate is  Refresh the users data
           setSucces(`${userDataStoring.username} added`);
-          setErrorMessage('');
+          setErrorMessage("");
 
           return res;
         } else {
