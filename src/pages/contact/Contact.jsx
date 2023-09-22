@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import useSWR, { useSWRConfig } from 'swr';
+import { useState } from "react";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import useSWR, { useSWRConfig } from "swr";
 
-import creteNewCustomerIcon from '../../assets/addIcon.svg';
-import '../../sass/contact/_contact.scss';
+import creteNewCustomerIcon from "../../assets/addIcon.svg";
+import "../../sass/contact/_contact.scss";
 
-import ContactView from '../../components/contact/ContactView';
-import { fetchTableCustomers } from '../../api';
-import LoadingView from '../../components/LoadingView';
+import ContactView from "../../components/contact/ContactView";
+import { fetchTableCustomers } from "../../api";
+import LoadingView from "../../components/LoadingView";
 
 const Contact = ({ token }) => {
-  const [inputSearchCustomer, setInputSearchCustomer] = useState('');
+  const [inputSearchCustomer, setInputSearchCustomer] = useState("");
   const [popupOpen, setPopupOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Contact = ({ token }) => {
     data: fetchCustomers,
     error: fetchCustomersError,
     isLoading: fetchCustomersLoading,
-  } = useSWR(['fetchCustomers', token], () => fetchTableCustomers(token), {
+  } = useSWR(["fetchCustomers", token], () => fetchTableCustomers(token), {
     refreshInterval: 1000, // Refresh data every 1 seconds
   });
 
@@ -28,7 +28,7 @@ const Contact = ({ token }) => {
   // if (fetchCustomersError) return <h6>{fetchCustomersError.message}</h6>; // I need to add personal error messages!
   if (fetchCustomersLoading) return <LoadingView />; // I need to add personal error messages!
 
-  const filteredCustomerResults = fetchCustomers.filter(customer => {
+  const filteredCustomerResults = fetchCustomers.filter((customer) => {
     const searchValue = inputSearchCustomer.toLowerCase().trim();
 
     const searchByFirstName = customer.first_name
@@ -44,13 +44,13 @@ const Contact = ({ token }) => {
   });
 
   // Event handler stop bubbling
-  const preventPropagation = event => {
+  const preventPropagation = (event) => {
     event.stopPropagation();
   };
 
   const popupWindow = () => {
-    setPopupOpen(x => !x);
-    navigate('/contact');
+    setPopupOpen((x) => !x);
+    navigate("/contact");
   };
 
   // Checking if the number already exsite in database for createing new user and update user
@@ -63,16 +63,16 @@ const Contact = ({ token }) => {
         );
 
         if (confirmDelete) {
-          await fetch(`http://localhost:4000/customer/${id}`, {
-            method: 'DELETE',
+          await fetch(`https://carpetcare.onrender.com/customer/${id}`, {
+            method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
-          mutate('http://localhost:4000/customer');
+          mutate("https://carpetcare.onrender.com/customer");
         }
       } catch (error) {
-        console.error('Error deleting user', error);
+        console.error("Error deleting user", error);
       }
     };
 
@@ -83,7 +83,7 @@ const Contact = ({ token }) => {
     <div className="contact--container">
       <nav className="contact--nav">
         <ul>
-          <NavLink to="addCustomer" onClick={() => setPopupOpen(x => !x)}>
+          <NavLink to="addCustomer" onClick={() => setPopupOpen((x) => !x)}>
             <li className="addCustomerLink">
               <img src={creteNewCustomerIcon} alt="create new user icon" />
               <p>add customer</p>
@@ -94,7 +94,7 @@ const Contact = ({ token }) => {
             <input
               type="search"
               placeholder="search for customer"
-              onChange={e => setInputSearchCustomer(e.target.value)}
+              onChange={(e) => setInputSearchCustomer(e.target.value)}
             />
           </li>
         </ul>

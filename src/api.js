@@ -1,6 +1,6 @@
-export const fetchTokenValidation = async (token) => {
+export const fetchTokenValidation = async token => {
   try {
-    const res = await fetch("https://carpetcare.onrender.com/login", {
+    const res = await fetch('https://carpetcare.onrender.com/login', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -11,13 +11,13 @@ export const fetchTokenValidation = async (token) => {
     if (data.success === true) return data.payload;
     else return null;
   } catch (err) {
-    console.log(err, "Token validation failed (Endpoint: /login).");
+    console.log(err, 'Token validation failed (Endpoint: /login).');
   }
 };
 
 // -===========================================================
 
-const BASE_URL = "https://carpetcare.onrender.com"; //  API base URL
+const BASE_URL = 'https://carpetcare.onrender.com'; // Your API base URL
 
 export const fetchApi = async (endpoint, token) => {
   try {
@@ -28,7 +28,7 @@ export const fetchApi = async (endpoint, token) => {
     });
 
     if (!response.ok) {
-      throw new Error("API request failed");
+      throw new Error('API request failed');
     }
 
     const data = await response.json();
@@ -44,8 +44,8 @@ export const fetchSingleUser = async ({ params }, token) => {
   return fetchApi(`/user/${id}`, token);
 };
 
-export const fetchTableDepartment = async (token) => {
-  return fetchApi("/table/departments", token);
+export const fetchTableDepartment = async token => {
+  return fetchApi('/table/departments', token);
 };
 
 export const fetchOrdersByDate = async (formattedDate, token) => {
@@ -63,15 +63,15 @@ export const fetchOrdersBySchedueledDate = async (
   );
 };
 
-export const fetchOrderStatus = async (token) => {
+export const fetchOrderStatus = async token => {
   return fetchApi(`/table/orderStatus`, token);
 };
 
-export const fetchTableCustomers = async (token) => {
+export const fetchTableCustomers = async token => {
   return fetchApi(`/customer`, token);
 };
 
-export const fetchTableServices = async (token) => {
+export const fetchTableServices = async token => {
   return fetchApi(`/table/services`, token);
 };
 
@@ -81,7 +81,7 @@ export const fetchTableServicesUpdate = async ({ params }, token) => {
   return fetchApi(`/customer/${id}`, token);
 };
 
-export const fetchOrderServices = async (token) => {
+export const fetchOrderServices = async token => {
   return fetchApi(`/table/orderServices`, token);
 };
 
@@ -97,19 +97,19 @@ export const fetchCustomerOrders = async ({ params }, token) => {
 
 // STATISTIC APIS
 
-export const fetchOrderStatisticByDay = async (token) => {
+export const fetchOrderStatisticByDay = async token => {
   return fetchApi(`/statistic/ordersByDay`, token);
 };
 
-export const fetchOrderStatisticByMonth = async (token) => {
+export const fetchOrderStatisticByMonth = async token => {
   return fetchApi(`/statistic/ordersByMonth`, token);
 };
 
-export const fetchOrderStatisticByStatus = async (token) => {
+export const fetchOrderStatisticByStatus = async token => {
   return fetchApi(`/statistic/ordersByStatus`, token);
 };
 
-export const fetchOrderStatisticByHour = async (token) => {
+export const fetchOrderStatisticByHour = async token => {
   return fetchApi(`/statistic/ordersByHourPerMonth`, token);
 };
 
@@ -123,10 +123,10 @@ export const fetchOrdersById = async (id, token) => {
   return fetchApi(`/table/orders/${id}`, token);
 };
 
-export const fetchTableInventory = async (token) => {
+export const fetchTableInventory = async token => {
   return fetchApi(`/table/inventory`, token);
 };
 
-export const fetchTableInventoryCategories = async (token) => {
+export const fetchTableInventoryCategories = async token => {
   return fetchApi(`/table/inventorycategories`, token);
 };

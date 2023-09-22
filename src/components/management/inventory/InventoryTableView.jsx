@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import '../../../sass/management/inventory/_inventoryTableView.scss';
-import editIcon from '../../../assets/updateIcon.svg';
-import deleteIcon from '../../../assets/deleteIcon.svg';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import ApiSendRequestMessage from '../../ApiSendRequestMessage';
-import { useSWRConfig } from 'swr';
+import { useEffect, useState } from "react";
+import "../../../sass/management/inventory/_inventoryTableView.scss";
+import editIcon from "../../../assets/updateIcon.svg";
+import deleteIcon from "../../../assets/deleteIcon.svg";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import ApiSendRequestMessage from "../../ApiSendRequestMessage";
+import { useSWRConfig } from "swr";
 
 const InventoryTableView = ({
   inventory,
@@ -14,28 +14,28 @@ const InventoryTableView = ({
 }) => {
   const [popupOpen, setPopupOpen] = useState(false);
   const navigate = useNavigate();
-  const [success, setSuccess] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [success, setSuccess] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { mutate } = useSWRConfig();
 
-  const handleClickInventory = i => {
+  const handleClickInventory = (i) => {
     handleSelectedInventory(i);
   };
 
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
-        setSuccess('');
+        setSuccess("");
       }, 5000);
       return () => clearTimeout(timer);
     }
   }, [success]);
   const popupWindow = () => {
-    setPopupOpen(e => !e);
-    navigate('/management/inventory/');
+    setPopupOpen((e) => !e);
+    navigate("/management/inventory/");
   };
 
-  const handleDeleteRequest = async i => {
+  const handleDeleteRequest = async (i) => {
     const confirmMessage = confirm(
       `Please confirm if you want to delete this inventory "${i.article_name}"`
     );
@@ -43,9 +43,9 @@ const InventoryTableView = ({
     if (confirmMessage) {
       try {
         const res = await fetch(
-          `http://localhost:4000/table/inventory/${i.id}`,
+          `https://carpetcare.onrender.com/table/inventory/${i.id}`,
           {
-            method: 'DELETE',
+            method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -53,9 +53,9 @@ const InventoryTableView = ({
         );
 
         if (res.ok) {
-          mutate(['inventory', token]);
-          setSuccess('service deleted');
-          setErrorMessage('');
+          mutate(["inventory", token]);
+          setSuccess("service deleted");
+          setErrorMessage("");
         } else {
           throw new Error();
         }
@@ -82,23 +82,23 @@ const InventoryTableView = ({
           </tr>
         </thead>
         <tbody>
-          {inventory.map(i => (
+          {inventory.map((i) => (
             <tr key={i.id}>
               <td
                 onClick={() => handleClickInventory(i)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               >
                 {i.article_number}
               </td>
-              <td>{i?.article_name ?? 'name not provided'}</td>
-              <td>{i?.details ?? 'details not provided'}</td>
-              <td>{i?.quantity ?? 'quanitiy not provided'}</td>
-              <td>{i?.category_name ?? 'category deleted'}</td>
-              <td>{i?.location ?? 'location not provided'}</td>
-              <td>{i?.price ?? 'price not provided'} €</td>
+              <td>{i?.article_name ?? "name not provided"}</td>
+              <td>{i?.details ?? "details not provided"}</td>
+              <td>{i?.quantity ?? "quanitiy not provided"}</td>
+              <td>{i?.category_name ?? "category deleted"}</td>
+              <td>{i?.location ?? "location not provided"}</td>
+              <td>{i?.price ?? "price not provided"} €</td>
               <td>{formatedDate(i.date_entry).slice(0, 10)}</td>
 
-              <td onClick={() => setPopupOpen(e => !e)}>
+              <td onClick={() => setPopupOpen((e) => !e)}>
                 <Link to={`/management/inventory/updateInventory/${i.id}`}>
                   <img src={editIcon} alt="edit inventory icon" />
                 </Link>
@@ -123,7 +123,7 @@ const InventoryTableView = ({
       <ApiSendRequestMessage success={success} errorMessage={errorMessage} />
       {popupOpen && (
         <div className="overlay" onClick={popupWindow}>
-          <main className="popUp" onClick={e => e.stopPropagation()}>
+          <main className="popUp" onClick={(e) => e.stopPropagation()}>
             <Outlet />
           </main>
         </div>

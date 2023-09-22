@@ -68,7 +68,7 @@ const UpdateInventory = ({ token }) => {
   return (
     <div className="updateInventory-wrap">
       <UpdateInventoryView
-        selectedInventoryData={[...selectedInventoryData[0]]}
+        selectedInventoryData={selectedInventoryData[0]}
         selectedInventoryID={selectedInventoryID}
         inventoryCategory={filteredInventoryCategory}
         formSubmitUpdate={updateSend}

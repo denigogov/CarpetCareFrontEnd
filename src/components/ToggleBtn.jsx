@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import '../sass/_toggleBtn.scss';
+import { useState } from "react";
+import "../sass/_toggleBtn.scss";
 
 const ToggleBtn = ({ handleShowCategory, showCategory }) => {
   const handleToggleTables = () => {
@@ -10,8 +10,8 @@ const ToggleBtn = ({ handleShowCategory, showCategory }) => {
     <div
       className={
         showCategory
-          ? 'togglebuttonContainer toggleTextOn'
-          : 'togglebuttonContainer toggleTextOff'
+          ? "togglebuttonContainer toggleTextOn"
+          : "togglebuttonContainer toggleTextOff"
       }
     >
       <label className="toggleContainer">
@@ -19,7 +19,7 @@ const ToggleBtn = ({ handleShowCategory, showCategory }) => {
         <div className="line-toggle">
           <div className="lineCircle-toggle"></div>
         </div>
-      </label>{' '}
+      </label>{" "}
       {!showCategory ? ` Category Visibility Off` : ` Category Visibility on`}
     </div>
   );

@@ -1,13 +1,13 @@
-import '../../../sass/management/inventory/_inventoryCategoryView.scss';
-import ApiSendRequestMessage from '../../ApiSendRequestMessage';
-import deleteUserIcon from '../../../assets/deleteIcon.svg';
-import { useRef, useState, useEffect } from 'react';
-import { useSWRConfig } from 'swr';
+import "../../../sass/management/inventory/_inventoryCategoryView.scss";
+import ApiSendRequestMessage from "../../ApiSendRequestMessage";
+import deleteUserIcon from "../../../assets/deleteIcon.svg";
+import { useRef, useState, useEffect } from "react";
+import { useSWRConfig } from "swr";
 
 const InventoryCategoryView = ({ inventoryCategories, token }) => {
   const [updateCategory, setUpdateCategory] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [success, setSuccess] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { mutate } = useSWRConfig();
 
@@ -16,13 +16,13 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
-        setSuccess('');
+        setSuccess("");
       }, 5000);
       return () => clearTimeout(timer);
     }
   }, [success]);
 
-  const handleUpdateCategory = i => {
+  const handleUpdateCategory = (i) => {
     setUpdateCategory(i.id);
   };
 
@@ -36,11 +36,11 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
     if (confirmUpdate) {
       try {
         const res = await fetch(
-          ` http://localhost:4000/table/inventorycategories/${updateCategory}`,
+          ` https://carpetcare.onrender.com/table/inventorycategories/${updateCategory}`,
           {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
@@ -50,9 +50,9 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
         );
 
         if (res.ok) {
-          mutate(['inventoryCategory', token]);
-          setSuccess('service updated');
-          setErrorMessage('');
+          mutate(["inventoryCategory", token]);
+          setSuccess("service updated");
+          setErrorMessage("");
         } else {
           throw new Error();
         }
@@ -63,7 +63,7 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
   };
 
   //   DELETE REQUEST
-  const handleDeleteRequest = async i => {
+  const handleDeleteRequest = async (i) => {
     const confirmUpdate = confirm(
       `Please confirm if you want to delete this category ${i.category_name}.`
     );
@@ -71,9 +71,9 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
     if (confirmUpdate) {
       try {
         const res = await fetch(
-          ` http://localhost:4000/table/inventorycategories/${i.id}`,
+          ` https://carpetcare.onrender.com/table/inventorycategories/${i.id}`,
           {
-            method: 'DELETE',
+            method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -81,9 +81,9 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
         );
 
         if (res.ok) {
-          mutate(['inventoryCategory', token]);
-          setSuccess('service deleted');
-          setErrorMessage('');
+          mutate(["inventoryCategory", token]);
+          setSuccess("service deleted");
+          setErrorMessage("");
         } else {
           throw new Error();
         }
@@ -105,7 +105,7 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
           </tr>
         </thead>
         <tbody>
-          {inventoryCategories.map(i => (
+          {inventoryCategories.map((i) => (
             <tr key={i.id}>
               <td>{i.id}</td>
 
