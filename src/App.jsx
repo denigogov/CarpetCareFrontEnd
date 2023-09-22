@@ -5,49 +5,49 @@ import {
   RouterProvider,
   redirect,
   Navigate,
-} from 'react-router-dom';
-import useToken from './useToken';
-import React, { useEffect, useState } from 'react';
+} from "react-router-dom";
+import useToken from "./useToken";
+import React, { useEffect, useState } from "react";
 
-import Login from './pages/Login';
-import Root from './pages/Root';
+import Login from "./pages/Login";
+import Root from "./pages/Root";
 
 // import Dashboard from './pages/dashboard/Dashboard';
-const LazyDashboard = React.lazy(() => import('./pages/dashboard/Dashboard'));
+const LazyDashboard = React.lazy(() => import("./pages/dashboard/Dashboard"));
 
 // Order Routes
-import Order from './pages/order/Order';
-import EditOrder from './pages/order/EditOrder';
-import CreateOrder from './pages/order/CreateOrder';
+import Order from "./pages/order/Order";
+import EditOrder from "./pages/order/EditOrder";
+import CreateOrder from "./pages/order/CreateOrder";
 
-import Delivery from './pages/delivery/Delivery';
+import Delivery from "./pages/delivery/Delivery";
 
 // Contact Router Component
-import Contact from './pages/contact/Contact';
-import CreateContact from './pages/contact/CreateContact';
-import EditContact from './pages/contact/EditContact';
-import DetailsContact from './pages/contact/DetailsContact';
+import Contact from "./pages/contact/Contact";
+import CreateContact from "./pages/contact/CreateContact";
+import EditContact from "./pages/contact/EditContact";
+import DetailsContact from "./pages/contact/DetailsContact";
 // Managment routes!
-import Management from './pages/management/Management';
-import Analytics from './pages/management/Analytics';
-import Expenses from './pages/management/Expenses';
+import Management from "./pages/management/Management";
+import Analytics from "./pages/management/Analytics";
+import Expenses from "./pages/management/Expenses";
 
 // Price Route
-import Price from './pages/management/Price/Price';
-import AddService from './pages/management/Price/AddService';
+import Price from "./pages/management/Price/Price";
+import AddService from "./pages/management/Price/AddService";
 
 // Inventory Route
 
-import Inventory from './pages/management/inventory/Inventory';
+import Inventory from "./pages/management/inventory/Inventory";
 
 // user routes
-import Users from './pages/management/Users';
-import EditUser from './pages/management/EditUser';
-import DetailsUser from './pages/management/DetailsUser';
-import CreateUser from './pages/management/CreateUser';
+import Users from "./pages/management/Users";
+import EditUser from "./pages/management/EditUser";
+import DetailsUser from "./pages/management/DetailsUser";
+import CreateUser from "./pages/management/CreateUser";
 
-import LoadingView from './components/LoadingView';
-import ErrorDisplayView from './components/ErrorDisplayView';
+import LoadingView from "./components/LoadingView";
+import ErrorDisplayView from "./components/ErrorDisplayView";
 
 import {
   fetchSingleUser,
@@ -56,12 +56,13 @@ import {
   fetchSingleCustomer,
   fetchCustomerOrders,
   fetchOrderById,
-} from './api';
-import CreateInventory from './pages/management/inventory/CreateInventory';
-import CreateNewCategory from './pages/management/inventory/CreateNewCategory';
-import UpdateInventory from './pages/management/inventory/UpdateInventory';
-import OrderStatus from './pages/management/orderStatus/Status';
-import AddStatus from './pages/management/orderStatus/AddStatus';
+} from "./api";
+import CreateInventory from "./pages/management/inventory/CreateInventory";
+import CreateNewCategory from "./pages/management/inventory/CreateNewCategory";
+import UpdateInventory from "./pages/management/inventory/UpdateInventory";
+import OrderStatus from "./pages/management/orderStatus/Status";
+import AddStatus from "./pages/management/orderStatus/AddStatus";
+import { HashRouter } from "react-router-dom";
 
 const App = () => {
   const { token, setToken } = useToken(null);
@@ -69,11 +70,11 @@ const App = () => {
 
   useEffect(() => {
     const validateToken = async () => {
-      if (typeof token === 'string') {
+      if (typeof token === "string") {
         const userInfos = await fetchTokenValidation(token);
 
         if (userInfos) setUserInfo(userInfos);
-        else setToken('');
+        else setToken("");
       }
     };
     validateToken();
