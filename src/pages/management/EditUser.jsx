@@ -17,8 +17,9 @@ const EditUser = ({ token }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchTableDepartment(token);
+      const filteredData = data?.filter((department) => department?.id !== 3);
 
-      setDepartments(data);
+      setDepartments(filteredData);
     };
 
     if (success) {

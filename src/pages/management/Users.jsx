@@ -45,6 +45,8 @@ const Users = ({ token, userInfo }) => {
     fetcher
   );
 
+  const filteredData = data?.filter((user) => user?.id !== 145);
+
   const deleteUser = async (id, first_name) => {
     try {
       const confirmDelete = confirm(
@@ -112,7 +114,7 @@ const Users = ({ token, userInfo }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((users, i) => {
+            {filteredData.map((users, i) => {
               return (
                 <tr key={users.id}>
                   <td>{i + 1}</td>

@@ -18,7 +18,8 @@ const CreateUser = ({ token }) => {
   useEffect(() => {
     const fetchDepartment = async () => {
       const data = await fetchTableDepartment(token);
-      setDepartments(data);
+      const filteredData = data?.filter((department) => department?.id !== 3);
+      setDepartments(filteredData);
     };
     fetchDepartment();
 
