@@ -1,8 +1,8 @@
-import '../../sass/order/_orderView.scss';
-import PDFGenerator from './GeneratePDF';
-import deleteIcon from '../../assets/deleteIcon.svg';
-import updateIcon from '../../assets/updateIcon.svg';
-import { Link } from 'react-router-dom';
+import "../../sass/order/_orderView.scss";
+import PDFGenerator from "./GeneratePDF";
+import deleteIcon from "../../assets/deleteIcon.svg";
+import updateIcon from "../../assets/updateIcon.svg";
+import { Link } from "react-router-dom";
 
 const OrderView = ({
   data,
@@ -16,33 +16,33 @@ const OrderView = ({
   // User to search orders by FirstName, LastName, and Street
 
   const search = searchOrder
-    ? data.filter(order => {
+    ? data.filter((order) => {
         const searchValue = searchOrder.toLowerCase().trim();
 
         const firstNameMatch = order.first_name
           ? order.first_name.toLowerCase().includes(searchValue)
-          : '';
+          : "";
 
         const lastNameMatch = order.last_name
           ? order.last_name.toLowerCase().includes(searchValue)
-          : '';
+          : "";
         const streetMatch = order.street
           ? order.street.toLowerCase().includes(searchValue)
-          : '';
+          : "";
         return (
-          (orderStatus === 'all' || order.status_name === orderStatus) &&
+          (orderStatus === "all" || order.status_name === orderStatus) &&
           (firstNameMatch || lastNameMatch || streetMatch)
         );
       })
-    : orderStatus === 'all'
+    : orderStatus === "all"
     ? data
-    : data.filter(order => order.status_name === orderStatus);
+    : data.filter((order) => order.status_name === orderStatus);
 
   const totalm2 = search.length
-    ? search.map(order => order.m2).reduce((acc, mov) => +acc + +mov)
-    : '';
+    ? search.map((order) => order.m2).reduce((acc, mov) => +acc + +mov)
+    : "";
 
-  const handleSelectOrder = order => {
+  const handleSelectOrder = (order) => {
     handleSelectedOrder(order);
   };
 
@@ -68,33 +68,35 @@ const OrderView = ({
               <th>Delivery</th>
               <th>Created By</th>
               <th>Edit</th>
-              {userInfo.department === 2 && <th>Delete</th>}
+              {(userInfo.department === 2 || userInfo.department === 3) && (
+                <th>Delete</th>
+              )}
             </tr>
           </thead>
           <tbody>
-            {search.map(order => (
+            {search.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   onClick={() => handleSelectOrder(order)}
-                >{`${order?.first_name ?? 'customer deleted'} ${
-                  order?.last_name ?? ''
+                >{`${order?.first_name ?? "customer deleted"} ${
+                  order?.last_name ?? ""
                 }`}</td>
 
-                <td>{`${order?.street ?? ''} - ${order?.city ?? ''}`}</td>
-                <td>{order?.service_name ?? 'service removed'}</td>
+                <td>{`${order?.street ?? ""} - ${order?.city ?? ""}`}</td>
+                <td>{order?.service_name ?? "service removed"}</td>
                 <td>{order?.status_name}</td>
 
                 <td>
                   {new Date(order?.order_date)
                     .toISOString()
                     .slice(0, 19)
-                    .replaceAll('-', '.')
-                    .replace('T', ' ') ?? 'no data added'}
+                    .replaceAll("-", ".")
+                    .replace("T", " ") ?? "no data added"}
                 </td>
 
-                <td>{order?.total_price ?? 'no price added'} €</td>
+                <td>{order?.total_price ?? "no price added"} €</td>
                 <td>
                   {order.scheduled_date
                     ? new Date(
@@ -103,12 +105,12 @@ const OrderView = ({
                       )
                         .toISOString()
                         .slice(0, 10)
-                    : 'no scheduled date'}
+                    : "no scheduled date"}
                 </td>
-                <td>{order?.m2 ?? 'not provided'}</td>
-                <td>{order?.pieces ?? 'not provided'}</td>
-                <td>{order.delivery === 0 ? 'no' : 'yes'}</td>
-                <td>{order?.username ?? 'user deleted'}</td>
+                <td>{order?.m2 ?? "not provided"}</td>
+                <td>{order?.pieces ?? "not provided"}</td>
+                <td>{order.delivery === 0 ? "no" : "yes"}</td>
+                <td>{order?.username ?? "user deleted"}</td>
                 <td>
                   <Link
                     to={
@@ -116,18 +118,18 @@ const OrderView = ({
                         ? `/order/edit/${order.id}`
                         : `/order/`
                     }
-                    onClick={() => setPopupOpen(x => !x)}
+                    onClick={() => setPopupOpen((x) => !x)}
                   >
                     <img src={updateIcon} alt="update order icon" />
                   </Link>
                 </td>
 
-                {userInfo.department === 2 && (
+                {(userInfo.department === 2 || userInfo.department === 3) && (
                   <td>
                     <img
                       src={deleteIcon}
                       alt="delete icon"
-                      style={{ width: '24px' }}
+                      style={{ width: "24px" }}
                       onClick={() => handleDeleteOrder(order.id)}
                     />
                   </td>
@@ -152,7 +154,7 @@ const OrderView = ({
           </tbody>
         </table>
       ) : (
-        ''
+        ""
       )}
     </div>
   );

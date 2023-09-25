@@ -97,7 +97,10 @@ const EditOrder = ({ token, userInfo }) => {
       <div
         className="editOrder--wrap"
         style={{
-          gridTemplateColumns: userInfo.department === 2 ? "1fr 1fr" : "1fr",
+          gridTemplateColumns:
+            userInfo.department === 2 || userInfo.department === 3
+              ? "1fr 1fr"
+              : "1fr",
         }}
       >
         <div>
@@ -113,7 +116,7 @@ const EditOrder = ({ token, userInfo }) => {
         </div>
 
         <div className="editOrder--ownerView">
-          {userInfo.department === 2 && (
+          {(userInfo.department === 2 || userInfo.department === 3) && (
             <EditOrderOwnerView
               fetchOrderById={fetchOrderById}
               totalPriceRef={totalPriceRef}
