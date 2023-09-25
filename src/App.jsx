@@ -138,7 +138,7 @@ const App = () => {
             }
           />
         </Route>
-        {userInfo.department === 2 && (
+        {(userInfo.department === 2 || userInfo.department === 3) && (
           <Route path="management" element={<Management token={token} />}>
             <Route
               path="users"
