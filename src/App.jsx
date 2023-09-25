@@ -89,11 +89,11 @@ const App = () => {
         path="/"
         element={<Root setToken={setToken} userInfo={userInfo} />}
       >
-        <Route index element={<Navigate to="/dashboard" />} />
+        <Route index element={<Navigate to="dashboard" />} />
         {/* <Route path="dashboard" element={<Dashboard token={token} />} /> */}
         {/* JUST FOR TESTING PURPOSE IT SHOULD SPEED UP THE APP!!!! NEW NEW NEW  */}
         <Route
-          path="/dashboard"
+          path="dashboard"
           element={
             <React.Suspense fallback={<LoadingView />}>
               <LazyDashboard token={token} />
@@ -101,7 +101,7 @@ const App = () => {
           }
         />
         <Route
-          path="/order"
+          path="order"
           element={<Order token={token} userInfo={userInfo} />}
         >
           <Route
@@ -139,7 +139,7 @@ const App = () => {
           />
         </Route>
         {userInfo.department === 2 && (
-          <Route path="/management" element={<Management token={token} />}>
+          <Route path="management" element={<Management token={token} />}>
             <Route
               path="users"
               element={<Users token={token} userInfo={userInfo} />}
