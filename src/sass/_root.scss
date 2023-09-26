@@ -1,5 +1,5 @@
-@use './colors';
-@use './general';
+@use "./colors";
+@use "./general";
 
 .navbarContainer {
   display: flex;
@@ -53,13 +53,12 @@
     // margin-top: -100px;
   }
 
-  nav {
+  .mainNavBar {
     background-color: colors.$background-Primary;
     border-right: 1px solid colors.$borderLine-Primary;
     font-weight: 500;
     font-size: 16px;
     letter-spacing: 0.5px;
-
     transition: general.$transition;
     ul {
       text-align: justify;
@@ -142,4 +141,24 @@ footer p {
 
 .linkedInLogo {
   width: 50px;
+}
+
+@media screen and (max-width: general.$mobile) {
+  .navbar-left {
+    display: none;
+  }
+
+  // Logout Btn
+  .navbar-top {
+    display: none;
+  }
+}
+@media screen and (max-width: general.$tablet), (max-width: general.$laptop) {
+  .navbar-left {
+    height: calc(100vh + 80px);
+  }
+
+  .mainNavBar {
+    width: 26.5vw;
+  }
 }

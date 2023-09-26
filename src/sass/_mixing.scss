@@ -1,5 +1,5 @@
-@use './colors';
-@use './general';
+@use "./colors";
+@use "./general";
 
 @mixin inputFieldsLogin($borderColor: colors.$borderLine-Primary) {
   border: 1px solid $borderColor;
@@ -88,6 +88,31 @@
     tr:hover {
       transition: general.$transition;
       background-color: colors.$background-Primary;
+    }
+  }
+
+  @media (max-width: general.$mobile), (max-width: general.$tablet) {
+    td {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 15ch auto;
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+
+      &::before {
+        content: attr(data-cell) ": ";
+        font-weight: 600;
+      }
+    }
+
+    th {
+      display: none;
     }
   }
 }

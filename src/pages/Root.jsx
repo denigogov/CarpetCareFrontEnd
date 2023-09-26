@@ -27,7 +27,7 @@ const Root = ({ setToken, userInfo }) => {
             </div>
           </div>
           <div className="userLoggedin">{userInfo.name}</div>
-          <nav>
+          <nav className="mainNavBar">
             <ul>
               <NavLink
                 to="dashboard"
