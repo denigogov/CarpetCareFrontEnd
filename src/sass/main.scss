@@ -65,7 +65,13 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: general.$mobile) {
+    width: 90%;
+    height: 90%;
+  }
 }
+
 .overlay {
   position: fixed;
   top: 0;
