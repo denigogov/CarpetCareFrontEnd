@@ -53,11 +53,11 @@
 
   @media (max-width: general.$mobile) {
     background-color: transparent;
-    padding: 7px;
+    padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &:focus {
-      outline: 1px solid colors.$borderLine-Primary;
+      outline: 1px solid colors.$borderLine-Second;
     }
   }
 }

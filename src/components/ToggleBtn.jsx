@@ -1,15 +1,20 @@
 import { useState } from "react";
 import "../sass/_toggleBtn.scss";
 
-const ToggleBtn = ({ handleShowCategory, showCategory }) => {
+const ToggleBtn = ({
+  handlerOnClik,
+  state,
+  toggleTextOn = "on",
+  toggleTextOff = "off",
+}) => {
   const handleToggleTables = () => {
-    handleShowCategory();
+    handlerOnClik();
   };
 
   return (
     <div
       className={
-        showCategory
+        state
           ? "togglebuttonContainer toggleTextOn"
           : "togglebuttonContainer toggleTextOff"
       }
@@ -19,8 +24,8 @@ const ToggleBtn = ({ handleShowCategory, showCategory }) => {
         <div className="line-toggle">
           <div className="lineCircle-toggle"></div>
         </div>
-      </label>{" "}
-      {!showCategory ? ` Category Visibility Off` : ` Category Visibility on`}
+      </label>
+      {!state ? ` ${toggleTextOff}` : ` ${toggleTextOn}`}
     </div>
   );
 };
