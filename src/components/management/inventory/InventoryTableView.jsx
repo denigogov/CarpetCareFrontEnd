@@ -85,26 +85,37 @@ const InventoryTableView = ({
           {inventory.map((i) => (
             <tr key={i.id}>
               <td
+                data-cell="ID"
                 onClick={() => handleClickInventory(i)}
                 style={{ cursor: "pointer" }}
               >
                 {i.article_number}
               </td>
-              <td>{i?.article_name ?? "name not provided"}</td>
-              <td>{i?.details ?? "details not provided"}</td>
-              <td>{i?.quantity ?? "quanitiy not provided"}</td>
-              <td>{i?.category_name ?? "category deleted"}</td>
-              <td>{i?.location ?? "location not provided"}</td>
-              <td>{i?.price ?? "price not provided"} €</td>
-              <td>{formatedDate(i.date_entry).slice(0, 10)}</td>
+              <td data-cell="Name">{i?.article_name ?? "name not provided"}</td>
+              <td data-cell="Details">
+                {i?.details ?? "details not provided"}
+              </td>
+              <td data-cell="Quantity">
+                {i?.quantity ?? "quanitiy not provided"}
+              </td>
+              <td data-cell="Category">
+                {i?.category_name ?? "category deleted"}
+              </td>
+              <td data-cell="Location">
+                {i?.location ?? "location not provided"}
+              </td>
+              <td data-cell="Price">{i?.price ?? "price not provided"} €</td>
+              <td data-cell="Entry Date">
+                {formatedDate(i.date_entry).slice(0, 10)}
+              </td>
 
-              <td onClick={() => setPopupOpen((e) => !e)}>
+              <td data-cell="Edit" onClick={() => setPopupOpen((e) => !e)}>
                 <Link to={`/management/inventory/updateInventory/${i.id}`}>
                   <img src={editIcon} alt="edit inventory icon" />
                 </Link>
               </td>
 
-              <td>
+              <td data-cell="Delete">
                 <img
                   src={deleteIcon}
                   alt="edit inventory icon"

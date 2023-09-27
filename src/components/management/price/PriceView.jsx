@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import '../../../sass/management/price/_priceView.scss';
-import useSWR, { useSWRConfig } from 'swr';
-import deleteUserIcon from '../../../assets/deleteIcon.svg';
-import addIcon from '../../../assets/addIcon.svg';
-import ApiSendRequestMessage from '../../ApiSendRequestMessage';
-import { handlePostPutDeleteRequest } from '../../../handleRequests';
+import { useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import "../../../sass/management/price/_priceView.scss";
+import useSWR, { useSWRConfig } from "swr";
+import deleteUserIcon from "../../../assets/deleteIcon.svg";
+import addIcon from "../../../assets/addIcon.svg";
+import ApiSendRequestMessage from "../../ApiSendRequestMessage";
+import { handlePostPutDeleteRequest } from "../../../handleRequests";
 
 const PriceView = ({
   token,
@@ -28,13 +28,13 @@ const PriceView = ({
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
-        setSuccess('');
+        setSuccess("");
       }, 5000);
       return () => clearTimeout(timer);
     }
   }, [success]);
 
-  const handleEditClick = service => {
+  const handleEditClick = (service) => {
     setEditService(service);
     setSelectedService(service);
     // creating as default values!
@@ -47,9 +47,9 @@ const PriceView = ({
     setEditService(false);
   };
 
-  const handleDeleteClick = async service => {
+  const handleDeleteClick = async (service) => {
     if (service.id === 4) {
-      setErrorMessage('You cannot delete this service.');
+      setErrorMessage("You cannot delete this service.");
       return;
     }
 
@@ -59,17 +59,17 @@ const PriceView = ({
 
     if (confirmDelete) {
       handlePostPutDeleteRequest(
-        '/table/services/',
+        "/table/services/",
         service.id,
-        'DELETE',
+        "DELETE",
         token,
         null,
-        'delete faild',
+        "delete faild",
         setErrorMessage,
         setSuccess,
         mutate,
-        'tableServices',
-        'service deleted'
+        "tableServices",
+        "service deleted"
       );
 
       // Leave as REFERENCES!
@@ -99,13 +99,13 @@ const PriceView = ({
   };
 
   // Event handler stop bubbling
-  const preventPropagation = event => {
+  const preventPropagation = (event) => {
     event.stopPropagation();
   };
 
   const popupWindow = () => {
-    setPopupOpen(x => !x);
-    navigate('/management/price');
+    setPopupOpen((x) => !x);
+    navigate("/management/price");
   };
 
   return (
@@ -115,9 +115,9 @@ const PriceView = ({
           <tr>
             <th>
               <Link
-                style={{ color: 'black' }}
+                style={{ color: "black" }}
                 to={`/management/price/addService/`}
-                onClick={() => setPopupOpen(x => !x)}
+                onClick={() => setPopupOpen((x) => !x)}
               >
                 <img src={addIcon} alt="plus icon" /> add service
               </Link>
@@ -132,13 +132,13 @@ const PriceView = ({
         <tbody>
           {tableServices.map((service, i) => (
             <tr key={i}>
-              <td>{i + 1}</td>
-              <td>
+              <td data-cell="#">{i + 1}</td>
+              <td data-cell="Service Name">
                 {editService === service ? (
                   <input
                     type="text"
                     defaultValue={service.service_name}
-                    onChange={e => {
+                    onChange={(e) => {
                       setServiceName(e.target.value);
                     }}
                   />
@@ -146,14 +146,14 @@ const PriceView = ({
                   service.service_name
                 )}
               </td>
-              <td>
+              <td data-cell="Service Price">
                 {editService === service ? (
                   <input
                     type="number"
                     step="0.01"
                     min="0"
                     defaultValue={service.service_price}
-                    onChange={e => {
+                    onChange={(e) => {
                       setServicePrice(e.target.value);
                     }}
                   />
@@ -161,7 +161,7 @@ const PriceView = ({
                   `${service.service_price} €`
                 )}
               </td>
-              <td>
+              <td data-cell="update">
                 {editService === service ? (
                   <button className="updateBtn" onClick={handleUpdateClick}>
                     update
@@ -171,7 +171,7 @@ const PriceView = ({
                 )}
               </td>
 
-              <td>
+              <td data-cell="Remove">
                 <img
                   src={deleteUserIcon}
                   alt="delete service icon"
