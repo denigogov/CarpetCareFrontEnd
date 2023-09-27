@@ -117,13 +117,13 @@ const Users = ({ token, userInfo }) => {
             {filteredData.map((users, i) => {
               return (
                 <tr key={users.id}>
-                  <td>{i + 1}</td>
-                  <td>{users.username}</td>
-                  <td>{users.first_name}</td>
-                  <td>{users.last_name}</td>
-                  <td>{users.department_name}</td>
+                  <td data-cell="#">{i + 1}</td>
+                  <td data-cell="Username">{users.username}</td>
+                  <td data-cell="First Name">{users.first_name}</td>
+                  <td data-cell="Last Name">{users.last_name}</td>
+                  <td data-cell="Department">{users.department_name}</td>
 
-                  <td>
+                  <td data-cell="Details">
                     <Link
                       to={`/management/users/details/${users.id}`}
                       onClick={() => setPopupOpen((x) => !x)}
@@ -132,7 +132,7 @@ const Users = ({ token, userInfo }) => {
                     </Link>
                   </td>
 
-                  <td>
+                  <td data-cell="Edit">
                     <Link
                       to={`/management/users/edit/${users.id}`}
                       onClick={popupWindow}
@@ -142,7 +142,7 @@ const Users = ({ token, userInfo }) => {
                   </td>
 
                   {userInfo.id === users.id || (
-                    <td>
+                    <td data-cell="Remove">
                       <img
                         onClick={() => deleteUser(users.id, users.first_name)}
                         className="userDeleteIcon"

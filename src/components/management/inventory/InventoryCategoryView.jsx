@@ -107,12 +107,12 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
         <tbody>
           {inventoryCategories.map((i) => (
             <tr key={i.id}>
-              <td>{i.id}</td>
+              <td data-cell="ID">{i.id}</td>
 
               {updateCategory !== i.id ? (
-                <td>{i.category_name}</td>
+                <td data-cell="Name">{i.category_name}</td>
               ) : (
-                <td>
+                <td data-cell="Name">
                   <input
                     type="text"
                     defaultValue={i.category_name}
@@ -120,7 +120,7 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
                   />
                 </td>
               )}
-              <td>
+              <td data-cell="Update">
                 {updateCategory !== i.id ? (
                   <button onClick={() => handleUpdateCategory(i)}>edit</button>
                 ) : (
@@ -132,7 +132,7 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
                   </button>
                 )}
               </td>
-              <td>
+              <td data-cell="Delete">
                 <img
                   src={deleteUserIcon}
                   alt="delete category icon"

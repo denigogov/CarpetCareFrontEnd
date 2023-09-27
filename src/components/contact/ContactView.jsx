@@ -79,7 +79,9 @@ const ContactView = ({
             })}
             {!filteredCustomerResults.length && (
               <tr>
-                <td colSpan="11">No customer found</td>
+                <td data-cell="Status" colSpan="11">
+                  No customer found
+                </td>
               </tr>
             )}
           </tbody>
