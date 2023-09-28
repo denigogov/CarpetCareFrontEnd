@@ -1,36 +1,35 @@
-import '../sass/_login.scss';
-import loginIcon from '../assets/icon-user.svg';
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+import "../sass/_login.scss";
+import loginIcon from "../assets/icon-user.svg";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
 const Login = ({ setToken, setUserInfo }) => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("demo");
+  const [password, setPassword] = useState("demo123");
+  const [error, setError] = useState("");
 
-  const loginResponse = async credentials => {
+  const loginResponse = async (credentials) => {
     try {
       const response = await fetch(`https://carpetcare.onrender.com/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
 
-      console.log(data);
       if (!response.ok) {
         throw new Error();
       }
       setUserInfo(data);
       return data.token;
     } catch (error) {
-      setError('wrong password or username');
+      setError("wrong password or username");
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginResponse({
       username,
@@ -52,15 +51,17 @@ const Login = ({ setToken, setUserInfo }) => {
       <form onSubmit={handleSubmit}>
         <input
           placeholder="username"
+          defaultValue="demo"
           type="text"
           className="login__username"
-          onChange={e => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           placeholder="password"
+          defaultValue="demo123"
           type="password"
           className="login__password"
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button className="login-btn">login</button>
       </form>

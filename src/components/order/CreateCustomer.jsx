@@ -49,7 +49,7 @@ const CreateCustomer = ({
         );
     }
 
-    console.log(findDuplicate);
+    // console.log(findDuplicate);
 
     if (!first_name || !last_name || !phone_number) {
       setError("Please fill in all the required fields.");

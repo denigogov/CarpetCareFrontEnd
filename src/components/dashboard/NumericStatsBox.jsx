@@ -2,7 +2,6 @@ import "../../sass/dashboard/_numericStatsBox.scss";
 import NumericStatsView from "./NumericStatsView";
 
 const NumericStatsBox = ({ token, statisticOrderByDay }) => {
-  console.log(statisticOrderByDay);
   // Data for CHART JS
   const orderStatisticTotal = {
     labels: statisticOrderByDay?.map((label) => label.day_of_week),
