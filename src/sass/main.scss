@@ -91,6 +91,18 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: general.$laptop) {
+    width: 50%;
+  }
+
+  @media (max-width: general.$tablet) {
+    width: 50%;
+  }
+
+  @media (max-width: general.$mobile) {
+    width: 80%;
+  }
 }
 
 .xsPopup {
@@ -100,9 +112,55 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: general.$laptop) {
+    width: 30%;
+  }
+
+  @media (max-width: general.$tablet) {
+    width: 50%;
+  }
+
+  @media (max-width: general.$mobile) {
+    width: 70%;
+  }
 }
 
 // FILTER FOR CHANGE COLOR OF SVG!!!!
 
 // filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg)
 //   brightness(119%) contrast(119%);
+
+// for some reason  its not working !
+// @media screen and (max-width: general.$laptop) {
+//   .smallPopup {
+//     width: 50%;
+//   }
+
+//   .xsPopup {
+//     width: 30%;
+//   }
+// }
+
+// @media (max-width: general.$tablet) {
+//   .smallPopup {
+//     width: 50%;
+//   }
+//   .xsPopup {
+//     width: 50%;
+//   }
+// }
+
+// @media (max-width: general.$mobile) {
+//   .smallPopup {
+//     width: 80%;
+//   }
+//   .xsPopup {
+//     width: 70%;
+//   }
+
+//   .popUp {
+//     width: 90%;
+//     height: 90%;
+//   }
+// }

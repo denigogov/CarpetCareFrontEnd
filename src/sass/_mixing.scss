@@ -72,6 +72,21 @@
   background-color: #fff;
 }
 
+@mixin iconLinkShow() {
+  padding: 10px;
+  display: flex;
+
+  &::after {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+  }
+
+  img {
+    width: 25px;
+  }
+}
+
 //   @mixin buttonHover($btnHoverColor: colors.$primary-darker) {
 //     background-color: $btnHoverColor;
 //   }

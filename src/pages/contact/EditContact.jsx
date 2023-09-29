@@ -137,7 +137,7 @@ const EditContact = ({ token }) => {
           />{" "}
           <label>postal code</label>
           <input
-            type="number"
+            type="tel"
             defaultValue={fethcSingleUserData.postalCode}
             ref={postalCodeRef}
             placeholder="E.g. 10117"

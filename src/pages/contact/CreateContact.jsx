@@ -130,7 +130,7 @@ const CreateContact = ({ token }) => {
             disabled={successfulMessage}
           />
           <input
-            type="number"
+            type="tel"
             pattern="[A-Za-z0-9]+"
             placeholder="Postal Code"
             ref={postalCodeRef}

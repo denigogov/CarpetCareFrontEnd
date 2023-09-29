@@ -133,17 +133,18 @@ const Order = ({ token, userInfo }) => {
             <DatePicker
               selected={wishDate}
               onChange={setWishDate}
-              closeOnScroll={true}
+              // closeOnScroll={true}
             />
           </li>
 
-          <li>
+          {/* for the future !  */}
+          {/* <li>
             <select>
               <option value="">order by period</option>
               <option value="">week</option>
               <option value="">month</option>
             </select>
-          </li>
+          </li> */}
 
           <li>
             <select onChange={selectOptions}>

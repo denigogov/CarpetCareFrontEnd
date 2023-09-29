@@ -13,6 +13,8 @@ const OrderStatusView = ({
   const [editStatus, setEditStatus] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
 
+  const isPhone = window.innerWidth < 1022;
+
   const navigate = useNavigate();
 
   const handleEditClick = (i) => {
@@ -43,6 +45,17 @@ const OrderStatusView = ({
 
   return (
     <div className="orderStatusView">
+      {isPhone && (
+        <div className="addStatusIcon">
+          <Link
+            style={{ color: "black" }}
+            to="/management/orderStatus/createStatus"
+            onClick={() => setPopupOpen((x) => !x)}
+          >
+            <img src={addIcon} alt="plus icon" />
+          </Link>
+        </div>
+      )}
       <table>
         <thead>
           <tr>
@@ -52,7 +65,7 @@ const OrderStatusView = ({
                 to="/management/orderStatus/createStatus"
                 onClick={() => setPopupOpen((x) => !x)}
               >
-                <img src={addIcon} alt="plus icon" /> add service
+                <img src={addIcon} alt="plus icon" /> add status
               </Link>
             </th>
             <th>Status Name</th>

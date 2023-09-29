@@ -22,6 +22,8 @@ const PriceView = ({
   const [editService, setEditService] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
 
+  const isTablet = window.innerWidth < 1022;
+
   const navigate = useNavigate();
 
   const { mutate } = useSWRConfig();
@@ -110,6 +112,18 @@ const PriceView = ({
 
   return (
     <div className="priceTable">
+      {isTablet && (
+        <div className="addServiceIcon">
+          <Link
+            style={{ color: "black" }}
+            to={`/management/price/addService/`}
+            onClick={() => setPopupOpen((x) => !x)}
+          >
+            <img src={addIcon} alt="plus icon" />
+          </Link>{" "}
+        </div>
+      )}
+
       <table>
         <thead>
           <tr>

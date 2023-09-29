@@ -81,7 +81,7 @@ const OrderStepTwo = ({
             <input
               required
               placeholder="carpet size in m²"
-              type="number"
+              type="tel"
               min="0"
               name="m2"
               value={arr.m2}
@@ -90,7 +90,7 @@ const OrderStepTwo = ({
 
             <input
               required
-              type="number"
+              type="tel"
               min="0"
               name="pieces"
               placeholder="add carpet pieces"

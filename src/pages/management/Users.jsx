@@ -20,6 +20,10 @@ const Users = ({ token, userInfo }) => {
   const [success, setSucces] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const isPhone = window.innerWidth < 1022;
+
+  console.log(window.innerWidth);
+
   const fetcher = async (url) => {
     const response = await fetch(url, {
       headers: {
@@ -77,8 +81,9 @@ const Users = ({ token, userInfo }) => {
         navigateTo1="/dashboard"
         navigateTo2="/order"
       />
-    ); // I need to add personal error messages!
-  if (isLoading) return <LoadingView />; //I need to add loading component!
+    );
+
+  if (isLoading) return <LoadingView />;
 
   // Event handler stop bubbling
   const preventPropagation = (event) => {
@@ -94,6 +99,17 @@ const Users = ({ token, userInfo }) => {
     <div>
       <div className="table-container">
         <table className="userTable">
+          {isPhone && (
+            <div className="createUserIcon">
+              <Link
+                to={`/management/users/addUser/`}
+                onClick={() => setPopupOpen((x) => !x)}
+              >
+                <img src={addUserIcon} alt="create new user icon" />
+              </Link>
+            </div>
+          )}
+
           <thead>
             <tr>
               <th>

@@ -8,7 +8,7 @@ import { useState } from "react";
 const Root = ({ setToken, userInfo }) => {
   const navigate = useNavigate();
 
-  const isPhone = window.innerWidth < 768; // Adjust the width threshold as needed
+  const isPhone = window.innerWidth < 768;
 
   const [openNavBar, setOpenNavBar] = useState(!isPhone);
 
