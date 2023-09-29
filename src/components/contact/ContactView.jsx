@@ -3,11 +3,15 @@ import detailsIcon from "../../assets/detailsIcon.svg";
 import deleteCustomerIcon from "../../assets/deleteIcon.svg";
 import editCustomerIcon from "../../assets/editIcon.svg";
 import { Link } from "react-router-dom";
+import ApiSendRequestMessage from "../ApiSendRequestMessage";
+import { useEffect } from "react";
 
 const ContactView = ({
   filteredCustomerResults,
   handleDeleteUser,
   setPopupOpen,
+  success,
+  errorMessage,
 }) => {
   return (
     <div>
@@ -86,6 +90,8 @@ const ContactView = ({
             )}
           </tbody>
         </table>
+
+        <ApiSendRequestMessage success={success} errorMessage={errorMessage} />
       </div>
     </div>
   );

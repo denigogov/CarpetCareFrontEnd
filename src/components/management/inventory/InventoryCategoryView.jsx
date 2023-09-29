@@ -3,6 +3,7 @@ import ApiSendRequestMessage from "../../ApiSendRequestMessage";
 import deleteUserIcon from "../../../assets/deleteIcon.svg";
 import { useRef, useState, useEffect } from "react";
 import { useSWRConfig } from "swr";
+import { handlePostPutDeleteRequest } from "../../../handleRequests";
 
 const InventoryCategoryView = ({ inventoryCategories, token }) => {
   const [updateCategory, setUpdateCategory] = useState(false);
@@ -26,7 +27,7 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
     setUpdateCategory(i.id);
   };
 
-  const handleUpdateRequest = async () => {
+  const handleUpdateRequest = () => {
     setUpdateCategory(false);
 
     const confirmUpdate = confirm(
@@ -34,62 +35,44 @@ const InventoryCategoryView = ({ inventoryCategories, token }) => {
     );
 
     if (confirmUpdate) {
-      try {
-        const res = await fetch(
-          ` https://carpetcare.onrender.com/table/inventorycategories/${updateCategory}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              category_name: categoryNameRef.current.value,
-            }),
-          }
-        );
-
-        if (res.ok) {
-          mutate(["inventoryCategory", token]);
-          setSuccess("service updated");
-          setErrorMessage("");
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        setErrorMessage(`update faild, please try again ${error}`);
-      }
+      handlePostPutDeleteRequest(
+        "/table/inventorycategories/",
+        updateCategory,
+        "PUT",
+        token,
+        {
+          category_name: categoryNameRef.current.value,
+        },
+        "update faild, please try again",
+        setErrorMessage,
+        setSuccess,
+        mutate,
+        "inventoryCategory",
+        "service updated"
+      );
     }
   };
 
   //   DELETE REQUEST
-  const handleDeleteRequest = async (i) => {
+  const handleDeleteRequest = (i) => {
     const confirmUpdate = confirm(
       `Please confirm if you want to delete this category ${i.category_name}.`
     );
 
     if (confirmUpdate) {
-      try {
-        const res = await fetch(
-          ` https://carpetcare.onrender.com/table/inventorycategories/${i.id}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (res.ok) {
-          mutate(["inventoryCategory", token]);
-          setSuccess("service deleted");
-          setErrorMessage("");
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        setErrorMessage(`delete faild, please try again ${error}`);
-      }
+      handlePostPutDeleteRequest(
+        "/table/inventorycategories/",
+        i.id,
+        "DELETE",
+        token,
+        null,
+        "delete faild, please try again",
+        setErrorMessage,
+        setSuccess,
+        mutate,
+        "inventoryCategory",
+        "service deleted"
+      );
     }
   };
 

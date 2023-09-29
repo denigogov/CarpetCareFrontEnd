@@ -3,6 +3,7 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import "../../sass/contact/_createContact.scss";
 import useSWR, { useSWRConfig } from "swr";
 import ApiSendRequestMessage from "../../components/ApiSendRequestMessage";
+import { handlePostPutDeleteRequest } from "../../handleRequests";
 
 const CreateContact = ({ token }) => {
   const [error, setError] = useState("");
@@ -58,6 +59,7 @@ const CreateContact = ({ token }) => {
       (customers) => customers.phone_number === phoneNumberRef.current.value
     );
 
+    // because of the if statemant I wont refactore this fn
     const addCustomer = async () => {
       try {
         const res = await fetch(`https://carpetcare.onrender.com/customer`, {

@@ -5,6 +5,7 @@ import deleteIcon from "../../../assets/deleteIcon.svg";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import ApiSendRequestMessage from "../../ApiSendRequestMessage";
 import { useSWRConfig } from "swr";
+import { handlePostPutDeleteRequest } from "../../../handleRequests";
 
 const InventoryTableView = ({
   inventory,
@@ -41,27 +42,19 @@ const InventoryTableView = ({
     );
 
     if (confirmMessage) {
-      try {
-        const res = await fetch(
-          `https://carpetcare.onrender.com/table/inventory/${i.id}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (res.ok) {
-          mutate(["inventory", token]);
-          setSuccess("service deleted");
-          setErrorMessage("");
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        setErrorMessage(`delete faild ${error}`);
-      }
+      handlePostPutDeleteRequest(
+        "/table/inventory/",
+        i.id,
+        "DELETE",
+        token,
+        null,
+        "service deleted",
+        setErrorMessage,
+        setSuccess,
+        mutate,
+        "inventory",
+        "service deleted"
+      );
     }
   };
   return (

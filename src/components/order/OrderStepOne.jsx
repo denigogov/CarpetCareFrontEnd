@@ -47,6 +47,7 @@ const OrderStepOne = ({
     setCreateNewCustomer(false);
   };
 
+  // HERE IS THE BUG I NEED TO FIX ... ITS NOT SENDING THE newest created ID I need to check where is the mistake !
   const addNewCustomer = () => {
     setSelectedUser("");
     // Toggle the state to open and close create user

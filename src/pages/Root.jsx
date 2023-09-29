@@ -110,7 +110,7 @@ const Root = ({ setToken, userInfo }) => {
 
           <div>
             {/* hide Navbar Icon Only visible to latop/Desktop */}
-            {!isPhone && <i class="bx bx-hide" onClick={handleNavBar}></i>}
+            {!isPhone && <i className="bx bx-hide" onClick={handleNavBar}></i>}
 
             {/* Logout  */}
             {isPhone && (

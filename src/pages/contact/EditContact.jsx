@@ -51,6 +51,7 @@ const EditContact = ({ token }) => {
       return userChangePhoneNumber;
     };
 
+    // Not refactoring !
     const addCustomer = async () => {
       try {
         const res = await fetch(

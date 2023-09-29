@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import "../../sass/order/_createCustomer.scss";
 import useSWR, { useSWRConfig } from "swr";
+import { handlePostPutDeleteRequest } from "../../handleRequests";
 
 const CreateCustomer = ({
   token,
@@ -56,6 +57,10 @@ const CreateCustomer = ({
       return;
     }
 
+    // I have to fix BUG
+    // When the user is created from order for the first time when u try its imposible after secound time you can create the user !
+
+    //  I need to transform into  **handlePostPutDeleteRequest**
     const addCustomer = async () => {
       try {
         const res = await fetch(`https://carpetcare.onrender.com/customer`, {

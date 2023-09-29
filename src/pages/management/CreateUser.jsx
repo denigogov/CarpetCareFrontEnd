@@ -47,6 +47,22 @@ const CreateUser = ({ token }) => {
   const submitCreateUser = (e) => {
     e.preventDefault();
 
+    // Leaving as a reference I need to refactore fetcing user with SWR without useEffect!
+
+    //  handlePostPutDeleteRequest(
+    //     "/user/",
+    //     null,
+    //     "POST",
+    //     token,
+    //     userDataStoring,
+    //     "error user not added, please try again",
+    //     setErrorMessage,
+    //     setSucces,
+    //     mutate,
+    //     "https://carpetcare.onrender.com/user",
+    //     `${userDataStoring.username} added`
+    //   );
+
     const createUser = async () => {
       try {
         const res = await fetch(`https://carpetcare.onrender.com/user/`, {

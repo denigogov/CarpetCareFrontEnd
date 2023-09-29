@@ -8,13 +8,26 @@ import "../../sass/contact/_contact.scss";
 import ContactView from "../../components/contact/ContactView";
 import { fetchTableCustomers } from "../../api";
 import LoadingView from "../../components/LoadingView";
+import { handlePostPutDeleteRequest } from "../../handleRequests";
+import { useEffect } from "react";
 
 const Contact = ({ token }) => {
   const [inputSearchCustomer, setInputSearchCustomer] = useState("");
   const [popupOpen, setPopupOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState("");
 
   const navigate = useNavigate();
   const { mutate } = useSWRConfig();
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess("");
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const {
     data: fetchCustomers,
@@ -57,22 +70,24 @@ const Contact = ({ token }) => {
 
   const handleDeleteUser = (id, first_name, last_name) => {
     const deleteCustomer = async () => {
-      try {
-        const confirmDelete = confirm(
-          `Please confirm if you want to delete this user ${first_name} ${last_name} This action cannot be undone.`
-        );
+      const confirmDelete = confirm(
+        `Please confirm if you want to delete this user ${first_name} ${last_name} This action cannot be undone.`
+      );
 
-        if (confirmDelete) {
-          await fetch(`https://carpetcare.onrender.com/customer/${id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          mutate("https://carpetcare.onrender.com/customer");
-        }
-      } catch (error) {
-        console.error("Error deleting user", error);
+      if (confirmDelete) {
+        handlePostPutDeleteRequest(
+          "/customer/",
+          id,
+          "DELETE",
+          token,
+          null,
+          "Error deleting user",
+          setErrorMessage,
+          setSuccess,
+          mutate,
+          "https://carpetcare.onrender.com/customer",
+          "User Deleted"
+        );
       }
     };
 
@@ -104,8 +119,11 @@ const Contact = ({ token }) => {
           filteredCustomerResults={filteredCustomerResults}
           handleDeleteUser={handleDeleteUser}
           setPopupOpen={setPopupOpen}
+          success={success}
+          errorMessage={errorMessage}
         />
       </div>
+
       {popupOpen && (
         <div className="overlay" onClick={popupWindow}>
           <main className="popUp" onClick={preventPropagation}>
