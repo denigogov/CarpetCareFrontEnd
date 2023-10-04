@@ -33,6 +33,7 @@ const Root = ({ setToken, userInfo }) => {
           <div className="logo">
             <div className="appLogo ">
               <img
+                title="LuxyCo Carpet Care Manager"
                 src={appLogo}
                 alt="app logo "
                 onClick={() => navigate("/dashboard")}
@@ -121,6 +122,7 @@ const Root = ({ setToken, userInfo }) => {
             <div className="footer__icons">
               <a target="_blank" href="https://github.com/denigogov">
                 <img
+                  title="GitHub Profile"
                   className="githubLogo"
                   src={githubIcon}
                   alt="github Logo"
@@ -132,6 +134,7 @@ const Root = ({ setToken, userInfo }) => {
                 href="https://www.linkedin.com/in/dejan-gogov-571871270/"
               >
                 <img
+                  title="LinkedIn Profile"
                   className="linkedInLogo"
                   src={linkedInIcon}
                   alt="linkedIn Logo"
