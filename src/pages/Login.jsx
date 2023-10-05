@@ -45,7 +45,7 @@ const Login = ({ setToken, setUserInfo }) => {
   return (
     <div className="loginView">
       <div className="companyName">
-        <p className="service">carpet cleaning manager</p>
+        <p className="service">Carpet Cleaning Management</p>
         <p className="name">LuxyCo</p>
       </div>
 
