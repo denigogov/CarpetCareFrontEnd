@@ -22,8 +22,6 @@ const Users = ({ token, userInfo }) => {
 
   const isPhone = window.innerWidth < 1022;
 
-  console.log(window.innerWidth);
-
   const fetcher = async (url) => {
     const response = await fetch(url, {
       headers: {

@@ -4,7 +4,6 @@ import deleteCustomerIcon from "../../assets/deleteIcon.svg";
 import editCustomerIcon from "../../assets/editIcon.svg";
 import { Link } from "react-router-dom";
 import ApiSendRequestMessage from "../ApiSendRequestMessage";
-import { useEffect } from "react";
 
 const ContactView = ({
   filteredCustomerResults,
