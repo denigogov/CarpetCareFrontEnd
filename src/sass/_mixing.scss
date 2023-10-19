@@ -120,7 +120,7 @@
     }
   }
 
-  @media (max-width: general.$mobile), (max-width: general.$tablet) {
+  @media (max-width: general.$tablet) {
     td {
       display: grid;
       gap: 0.5rem;
@@ -137,6 +137,7 @@
       &::before {
         content: attr(data-cell) ": ";
         font-weight: 600;
+        float: left;
       }
     }
 
