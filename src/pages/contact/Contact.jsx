@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
+import Swal from "sweetalert2";
 
 import creteNewCustomerIcon from "../../assets/addIcon.svg";
 import "../../sass/contact/_contact.scss";
@@ -19,15 +20,6 @@ const Contact = ({ token }) => {
 
   const navigate = useNavigate();
   const { mutate } = useSWRConfig();
-
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => {
-        setSuccess("");
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [success]);
 
   const {
     data: fetchCustomers,
@@ -70,11 +62,18 @@ const Contact = ({ token }) => {
 
   const handleDeleteUser = (id, first_name, last_name) => {
     const deleteCustomer = async () => {
-      const confirmDelete = confirm(
-        `Please confirm if you want to delete this user ${first_name} ${last_name} This action cannot be undone.`
-      );
+      const sendMessage = Swal.fire({
+        title: "Delete User",
+        html: `Please confirm if you want to delete this user <strong> ${first_name} ${last_name} </strong> This action cannot be undone.`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#da0063",
+        iconColor: "#da0063",
+        cancelButtonColor: "#b7b7b7",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-      if (confirmDelete) {
+      if ((await sendMessage).isConfirmed) {
         handlePostPutDeleteRequest(
           "/customer/",
           id,
@@ -86,7 +85,8 @@ const Contact = ({ token }) => {
           setSuccess,
           mutate,
           "https://carpetcare.onrender.com/customer",
-          "User Deleted"
+          "User Deleted",
+          "Deleted"
         );
       }
     };

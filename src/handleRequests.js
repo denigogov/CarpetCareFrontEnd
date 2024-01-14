@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const BASE_URL = "https://carpetcare.onrender.com";
 
 /**
@@ -49,6 +51,16 @@ export const handlePostPutDeleteRequest = async (
     const res = await fetch(apiUrl, requestOptions);
 
     if (res.ok) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        iconColor: "#da0063",
+        title: `${method}!`,
+        text: `${succ}`,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
       if (typeof mutateFunction === "function") {
         mutateFunction([`${mutateUrl}`, token]);
       }

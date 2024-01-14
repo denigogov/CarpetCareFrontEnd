@@ -40,6 +40,9 @@ dependencies:
   sass:
     specifier: ^1.66.0
     version: 1.66.0
+  sweetalert2:
+    specifier: ^11.10.3
+    version: 11.10.3
   swr:
     specifier: ^2.2.1
     version: 2.2.1(react@18.2.0)
@@ -2615,6 +2618,10 @@ packages:
 
   /svg-arc-to-cubic-bezier@3.2.0:
     resolution: {integrity: sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==}
+    dev: false
+
+  /sweetalert2@11.10.3:
+    resolution: {integrity: sha512-mZYtQR7v+khyEruq0SsVUa6XIdI9Aue8s2XAIpAwdlLN1T0w7mxKEjyubiBZ3/bLbHC/wGS4wNABvXWubCizvA==}
     dev: false
 
   /swr@2.2.1(react@18.2.0):
