@@ -55,8 +55,7 @@ export const handlePostPutDeleteRequest = async (
         position: "center",
         icon: "success",
         iconColor: "#da0063",
-        title: `${method}!`,
-        text: `${succ}`,
+        title: `${succ}!`,
         showConfirmButton: false,
         timer: 3000,
       });

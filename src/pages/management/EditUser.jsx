@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchTableDepartment } from "../../api";
 import useSWR, { useSWRConfig } from "swr";
 import ApiSendRequestMessage from "../../components/ApiSendRequestMessage";
+import Swal from "sweetalert2";
 
 const EditUser = ({ token }) => {
   const data = useLoaderData(token);
@@ -23,10 +24,15 @@ const EditUser = ({ token }) => {
     };
 
     if (success) {
-      const timer = setTimeout(() => {
-        setSucces("");
-      }, 2500);
-      return () => clearTimeout(timer);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        iconColor: "#da0063",
+        title: `${success}!`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      setSucces("");
     }
 
     fetchData();

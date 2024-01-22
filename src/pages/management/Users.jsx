@@ -12,6 +12,7 @@ import LoadingView from "../../components/LoadingView";
 import useSWR, { useSWRConfig } from "swr";
 import ErrorDisplayView from "../../components/ErrorDisplayView";
 import ApiSendRequestMessage from "../../components/ApiSendRequestMessage";
+import Swal from "sweetalert2";
 
 const Users = ({ token, userInfo }) => {
   const navigate = useNavigate();
@@ -32,15 +33,6 @@ const Users = ({ token, userInfo }) => {
     return response.json();
   };
 
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => {
-        setSucces("");
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [success]);
-
   // To Render ERROR ,DATA and WHEN DATA IS LOAD!
   const { data, error, isLoading } = useSWR(
     "https://carpetcare.onrender.com/user",
@@ -51,11 +43,18 @@ const Users = ({ token, userInfo }) => {
 
   const deleteUser = async (id, first_name) => {
     try {
-      const confirmDelete = confirm(
-        `Please confirm if you want to delete this user ${first_name.toUpperCase()} all data related to the user will be lost.`
-      );
+      const sendMessage = Swal.fire({
+        title: "Delete User",
+        html: `Please confirm if you want to delete this user <strong>${first_name.toUpperCase()}</strong> all data related to the user will be lost.`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#da0063",
+        iconColor: "#da0063",
+        cancelButtonColor: "#b7b7b7",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-      if (confirmDelete) {
+      if ((await sendMessage).isConfirmed) {
         await fetch(`https://carpetcare.onrender.com/user/${id}`, {
           method: "DELETE",
           headers: {
@@ -66,6 +65,15 @@ const Users = ({ token, userInfo }) => {
         mutate("https://carpetcare.onrender.com/user"); // mutate is  Refresh the users data
         setSucces("User Deleted");
         setErrorMessage("");
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          iconColor: "#da0063",
+          title: `${success}!`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
       }
     } catch (error) {
       setErrorMessage("Error deleting user", error);
@@ -170,7 +178,7 @@ const Users = ({ token, userInfo }) => {
             })}
           </tbody>
         </table>
-        <ApiSendRequestMessage success={success} errorMessage={errorMessage} />
+
         {/* PopUp window with background */}
         {popupOpen && (
           <div className="overlay" onClick={popupWindow}>

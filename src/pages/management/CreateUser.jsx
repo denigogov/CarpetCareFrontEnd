@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchTableDepartment } from "../../api";
 import ApiSendRequestMessage from "../../components/ApiSendRequestMessage";
 import { useOutletContext, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CreateUser = ({ token }) => {
   const { mutate } = useSWRConfig();
@@ -24,12 +25,18 @@ const CreateUser = ({ token }) => {
     fetchDepartment();
 
     if (success) {
-      const timer = setTimeout(() => {
-        setSucces("");
-        setPopupOpen(false);
-        navigate("/management/users/");
-      }, 2000);
-      return () => clearTimeout(timer);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        iconColor: "#da0063",
+        title: `Success!`,
+        html: `${success}!`,
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setSucces("");
+      setPopupOpen(false);
+      navigate("/management/users/");
     }
   }, [success]);
 
@@ -76,7 +83,7 @@ const CreateUser = ({ token }) => {
 
         if (res.ok) {
           mutate("https://carpetcare.onrender.com/user"); // mutate is  Refresh the users data
-          setSucces(`${userDataStoring.username} added`);
+          setSucces(`User ${userDataStoring.username} successfully  created`);
           setErrorMessage("");
 
           return res;
